@@ -1,0 +1,202 @@
+//Author: Gabi Appel
+//Due Date: 10/23/18
+//Sort type: QuickSort
+//Purpose: to see how long it takes different arrays to be sorted with quicksort to later compare with different types of sorts. 
+
+import java.util.*;
+public class QuickSort {
+
+	public static void main(String[] args) {
+		QuickSort num = new QuickSort();
+		
+		
+		//This section sorts the already sorted array of 100.
+		int arrSortedHund[] = sortedArrayHund();
+		long startSortedHund = System.currentTimeMillis();
+		num.sort(arrSortedHund, 0, arrSortedHund.length-1);
+		System.out.printf("Time take for already sorted 100:%d ms \n ", time(startSortedHund));
+		
+		//This section sorts the already sorted array of 1000.
+		int arrSortedThou[] = sortedArrayThousand();
+		long startSortedThou = System.currentTimeMillis();
+		num.sort(arrSortedThou, 0, arrSortedThou.length-1);
+		System.out.printf("Time taken for already sorted 1000: %d ms\n ", time(startSortedThou));
+		
+		//This section sorts the already sorted array of 10000.
+		int arrSortedTenThou[] = sortedArrayTenThou();
+		long startSortedTenThou = System.currentTimeMillis();
+		num.sort(arrSortedTenThou, 0, arrSortedTenThou.length-1);
+		System.out.printf("Time taken for already sorted 10000: %d ms\n ", time(startSortedTenThou));
+		
+		//This section sorts the random 100.
+		int arrRandHund[] = randomArrayHund();
+		long startRandHund = System.currentTimeMillis();
+		num.sort(arrRandHund, 0, arrRandHund.length-1);
+		System.out.printf("Time taken for random 100: %d ms\n", time(startRandHund));
+		
+		//This section sorts the random thousand.
+		int arrRandThou[] = randomArrayThousand();
+		long startRandThou = System.currentTimeMillis();
+		num.sort(arrRandThou, 0, arrRandThou.length-1);
+		System.out.printf("Time taken for random 1000: %d ms \n" , time(startRandThou));
+		
+		//This section sorts the random 10000
+		int arrRandTenThou[] = randomArrayTenThou();
+		long startRandTenThou = System.currentTimeMillis();
+		num.sort(arrRandTenThou, 0, arrRandTenThou.length-1);
+		System.out.printf("Time taken for random 10000: %d ms \n" , time(startRandTenThou));
+		
+		//This section sorts 10th element out of place.
+		int arrOneRand [] = oneRandomHund();
+		long startOneRandHund = System.currentTimeMillis();
+		num.sort(arrOneRand, 0, arrOneRand.length-1);
+		System.out.printf("Time taken for one random 100: %d ms \n" , time(startOneRandHund));
+
+		//The section sorts 10th element out of place.
+		int arrOneRandThou [] = oneRandomThou();
+		long startOneRandThou = System.currentTimeMillis();
+		num.sort(arrOneRandThou, 0, arrOneRandThou.length-1);
+		System.out.printf("Time taken for one random 1000: %d ms \n", time(startOneRandThou));
+		
+		//This section sorts 10th element out of place.
+		int arrOneRandTenThou [] = oneRandomTenThou();
+		long startOneRandTenThou = System.currentTimeMillis();
+		num.sort(arrOneRandTenThou, 0, arrOneRandTenThou.length-1);
+		System.out.printf("Time taken for one random 10000: %d ms \n", time(startOneRandTenThou));
+		
+		
+	}
+	
+	//This function has an already sorted array of ten numbers. 
+	public static int[] sortedArrayHund(){
+		int [] sortArr = new int[100];
+		
+		for(int i = 0; i < sortArr.length; i++) {
+			sortArr[i] = i + 1;
+		}
+		return sortArr;
+	}
+	//This function has an already sorted array of one thousand numbers.
+	public static int[] sortedArrayThousand() {
+		int [] sortArr = new int[1000];
+		
+		for(int i = 0; i < sortArr.length; i++) {
+			sortArr[i] = i + 1;
+		}
+		return sortArr;
+	}
+	//This function has an already sorted array of ten thousand numbers.
+	public static int[] sortedArrayTenThou() {
+		int [] sortArr = new int[10000];
+		
+		for(int i = 0; i < sortArr.length; i++) {
+			sortArr[i] = i + 1;
+		}
+		return sortArr;
+	}
+	//This function has a random array of 100 integers.
+	public static int[] randomArrayHund() {
+		int [] randArray = new int[100];
+		
+		for(int i = 0; i < randArray.length; i++) {
+			randArray[i] = (int)(Math.random() * 100);
+		}
+		return randArray;
+	}
+	//This function has a random array of 1000 ints.
+	public static int[] randomArrayThousand() {
+		int [] randArray = new int[1000];
+		
+		for(int i = 0; i < randArray.length; i++) {
+			randArray[i] = (int)(Math.random() * 1000);
+		}
+		return randArray;
+	}
+	//This function has a random array of 10000 ints. 
+	public static int[] randomArrayTenThou() {
+		int [] randArray = new int[10000];
+		
+		for(int i = 0; i < randArray.length; i++) {
+			randArray[i] = (int)(Math.random() * 10000);
+		}
+		return randArray;
+	}
+	//The 10th element is one out of place.
+	public static int[] oneRandomHund() {
+		int [] oneRand = new int[10];
+		int rand = 10;
+		for(int i = 0; i < oneRand.length; i++) {
+			oneRand[i] = i + 1;
+			oneRand[9] = rand;
+			rand = oneRand[8];
+			oneRand[8] = oneRand[9];
+		}
+		return oneRand;
+		
+	}
+	public static int[] oneRandomThou() {
+		int [] oneRand = new int[1000];
+		int temp = 10;
+		for(int i = 0; i < oneRand.length; i++) {
+			oneRand[i] = i + 1;
+			oneRand[9] = temp;
+			temp = oneRand[8];
+			oneRand[8] = oneRand[9];
+		}
+		return oneRand;
+	}
+	public static int[] oneRandomTenThou() {
+		int [] oneRand = new int[10000];
+		int temp = 10;
+		for(int i = 0; i < oneRand.length; i++) {
+			oneRand[i] = i + 1;
+			oneRand[9] = temp;
+			temp = oneRand[8];
+			oneRand[8] = oneRand[9];
+		}
+		return oneRand;
+	}
+	/*This function takes last element as pivot, places the pivot
+	 * element at its correct position in sorted array, and places all smaller 
+	 * elements to the left of pivot and all greater elements to the right of pivot
+	 */
+	int partition(int arr[], int low, int high) {
+		int pivot = arr[high];
+		int i = (low-1);
+		for(int j = low; j < high; j++) {
+			//if current element is smaller than or equal to pivot
+			if(arr[j] <= pivot) {
+				i++;
+				
+				//swap arr[i] and arr[j]
+				int temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+		//swap arr[i+1] and arr[high]
+		int temp = arr[i+1];
+		arr[i+1] = arr[high];
+		arr[high] = temp;
+		
+		return i+1;
+	}
+	//This is my sorting function.
+	void sort(int arr[], int low, int high) {
+		if(low < high) {
+			//pi is partitioning index, arr[pi] is now at right place
+			int pi = partition(arr, low, high);
+			
+			sort(arr, low, pi-1);
+			sort(arr, pi+1, high);
+		}
+	}
+	//Timer function
+	public static long time(long start) {
+		long time = System.currentTimeMillis() - start;
+		return time;
+	}
+}
+
+
+
